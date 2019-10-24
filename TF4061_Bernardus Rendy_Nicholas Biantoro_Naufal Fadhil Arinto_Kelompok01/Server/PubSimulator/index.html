@@ -1,0 +1,57 @@
+<head>
+    <title>Tubes</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"
+      type="text/javascript"
+    ></script>
+  </head>
+  <body>
+    <ul>
+      <li>TUGAS UTS TF4061</li>
+    </ul>
+  
+
+    
+    
+<div class="wrapper">
+  <p>HUMIDITY PARAMETER</p>
+  <canvas data-type="radial-gauge" id="humidity"
+      data-width="300"
+      data-height="300"
+      data-units="Km/h"
+      data-value="40"
+      data-min-value="0"
+      data-start-angle="90"
+      data-ticks-angle="180"
+      data-value-box="false"
+      data-max-value="100"
+      data-major-ticks="0,20,40,60,80,100"
+      data-minor-ticks="2"
+      data-stroke-ticks="true"
+      data-highlights='[
+          {"from": 70, "to": 100, "color": "rgba(200, 50, 50, .75)"}
+      ]'
+      data-color-plate="#fff"
+      data-border-shadow-width="0"
+      data-borders="false"
+      data-needle-type="arrow"
+      data-needle-width="2"
+      data-needle-circle-size="7"
+      data-needle-circle-outer="true"
+      data-needle-circle-inner="false"
+      data-animation-duration="800"
+      data-animation-rule="linear"
+  ></canvas>
+  <div class="thermometer-wrapper"> 
+    <meter class="thermometer" min="-30" max="50" value="0"></meter> 
+    <div id="labels"></div> 
+  </div> 
+  <hr/>
+</div>
+
+  </body>
+  

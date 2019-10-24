@@ -1,0 +1,55 @@
+body {
+    background-color: #555888;
+    font-family: sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+  
+  ul {
+    background-color: white;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: middle;
+  }
+  
+  li {
+    color: #34495e;
+    font-size: 30;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+.wrapper {
+  border: 1px solid #ccc;
+  width: 500px;
+  margin:20px auto;
+  padding: 20px;
+  text-align:center;
+}
+
+.thermometer-wrapper { 
+  background-image: url('background.svg'); 
+  background-repeat: no-repeat; 
+  position: relative; 
+  height: 300px; 
+  width: 75px; 
+  float: left; 
+  margin: 0em 1em 1em 0em; 
+  -ms-background-size: cover; 
+  -webkit-background-size: cover; 
+  -moz-background-size: cover; 
+  -o-background-size: cover; 
+  background-size: cover;
+}
+
+.thermometer { 
+  transform: rotate(270deg); 
+  -ms-transform: rotate(270deg); 
+  -webkit-transform: rotate(270deg); 
+  -o-transform: rotate(270deg); 
+  -moz-transform: rotate(270deg); 
+}
+
