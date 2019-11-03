@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+  <title>Tugas UTS TF4061 Industrial Internet of Things Kelompok 01</title> <!--create title in webpage-->
+  <link rel="stylesheet" href="./style.css" /> 
+  <script src="./plotly-latest.min.js"></script>
+  <script src="./mqttws31.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="./bootstrap.min.css">
+  <script src="./jquery-3.3.1.slim.min.js"></script>
+  <script src="./popper.min.js"></script>
+  <script src="./bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="text-center" style="background: #343a40; color: white; font-family: Roboto; font-size: 36px;">TUGAS UTS TF4061 INDUSTRIAL INTERNET OF THINGS KELOMPOK 01</div>
+  <!-- GAUGE FEATURE -->
+  <div class="row"> <!--Divide the main page into a few row for the web feature-->
+    <div class="col-4 mt-4"> <!--Define the location of web feature-->
+      <div class="box"> <!--Create a box for the web feature-->
+        <div class="wrapper fadeInDown px-4" id="formContent">
+          <div class="mt-4" style="color: white; font-family: Roboto; font-size: 36px;"> Light Intensity (Lux) </div> <!--Create Tittle for the feature-->
+          <div class="sc-gauge fadeIn first" ;> <!--Create gauge scale feature in webpage---->
+            <div class="sc-background">
+              <div id="ldrvaluerot" class="sc-percentage"></div>
+              <div class="sc-mask"></div>
+              <span class="sc-value"> 
+                <div id="avgGauge" style="color: white; font-size: 20px;"></div> <!--Display the value that pointed by the gauge-->
+              </span>
+            </div>
+            <span class="sc-min" style="color: white; font-family: Roboto">0</span> <!--Define the beginning value of gauge-->
+            <span class="sc-max" style="color: white; font-family: Roboto">500</span> <!--Define the end value of gauge-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- BUTTON FEATURE -->
+    <div class="col-4 mt-4"> <!--Define the location of the feature-->
+      <div class="box"> <!--Create box for the web feature-->
+        <div class="wrapper fadeInDown pb-3" id="formContent">
+          <div class="mt-4" style="color: white; font-family: Roboto; font-size: 36px;"> BUTTON STATUS </div> <!--Create tittle for web feature-->
+          <div id="butAutoManual" class="indicators pt-4 p-1" onclick="changeStatus1();">AUTO</div> <!--Create a round button with a certain command to perform-->
+          <div id="butLED" class="indicators pt-4 p-1" onclick="changeStatus2();">ON/OFF</div> <!--Create a round button with a certain command to perform-->
+          <div id="butLEDRGB" class="indicators pt-3 p-1" onclick="changeStatus3();">ON/OFF RGB</div> <!--Create a round button with a certain command to perform-->
+          <div class="pb-4 mb-1"></div> <!--Set the location of the button-->
+        </div>
+      </div>
+    </div>
+    <!-- SLIDER RGB -->
+    <div class="col-4 mt-4"> <!--Define the location of the feature-->
+      <div class="box"> <!--Create box for the web feature-->
+        <div class="wrapper fadeInDown" id="formContent">
+          <div class="mt-4" style="color: white; font-family: Roboto; font-size: 36px;"> RGB PARAMETER </div> <!--Create title for the web feature-->
+          <div class="row mt-5 pt-5"> <!--Divide the box into a certain length-->
+            <div class="col-3 ml-1"> <!--Define the location of the slider-->
+              <input type="range" min="0" max="255" value="50" class="sliderRGB R" id="sliderR"/> <!--Create a slider with a certain minimum and maximum value-->
+              <div class="mt-5 mb-5 pt-4"></div>
+              <div class="ml-5 pl-5" style="color: white; font-family: Roboto; font-size: 18px;">Red</div>
+              <div class="ml-5 pl-5 pb-3" id="sliderValR" style="color: white; font-family: Roboto; font-size: 18px;"></div> <!--Show the value of the slider-->
+            </div>
+            <div class="col-3"><!--Define the location of the slider-->
+              <input type="range" min="0" max="255" value="50" class="sliderRGB G" id="sliderG"/> <!--Create a slider with a certain minimum and maximum value-->
+              <div class="mt-5 mb-5 pt-4"></div>
+              <div class="ml-5 pl-5" style="color: white; font-family: Roboto; font-size: 18px;">Green</div>
+              <div class="ml-5 pl-5 pb-3" id="sliderValG" style="color: white; font-family: Roboto; font-size: 18px;"></div> <!--Show the value of the slider-->
+            </div> 
+            <div class="col-3"><!--Define the location of the slider-->
+              <input type="range" min="0" max="255" value="50" class="sliderRGB B" id="sliderB"/> <!--Create a slider with a certain minimum and maximum value-->
+              <div class="mt-5 mb-5 pt-4"></div>
+              <div class="ml-5 pl-5" style="color: white; font-family: Roboto; font-size: 18px;">Blue</div>
+              <div class="ml-5 pl-5 pb-3" id="sliderValB" style="color: white; font-family: Roboto; font-size: 18px;"></div> <!--Show the value of the slider-->
+            </div>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- SLIDER THRESHOLD -->
+    <div class="col-12 fadeIn first alarm-threshold"> <!--Define the position of the web feature-->
+      <div class="alarm-threshold" style="color: white; font-family: Roboto; font-size: 36px;"> <!--Create a tittle for web feature with certain settings-->
+        ALARM THRESHOLD
+      </div>
+      <div class="center"> 
+        <input type="range" min="0" max="500" value="50" class="slider" id="sliderThreshold"/> <!--Create a slider with a certain minimum and maximum value-->
+      </div> 
+      <div style="color: white; font-family: Roboto; font-size: 24px;"> <!--Create a tittle for web feature with certain settings-->
+        Threshold: <span id="sliderValThreshold"></span> 
+      </div>
+    </div>
+    <!-- ALARM -->
+    <div id="alarm" class="alarmC"></div> <!--Create a web feature for ALARM-->
+  </div>
+
+  <!-- CHART -->
+  <div style="background-color:white" class="rata_rata">
+    <center>
+    <p
+      style="font-size:160%; color:black; font-family:Roboto;"
+      class="container_title">
+      RATA - RATA LDR
+    </p><!--Create a tittle for web feature with certain settings-->
+    <div id="avgH" class="label" style="background: rgba(0,0,0,0.3); color:white;"></div> <!--The settings for the graph-->
+  </center>
+
+    <div id="graphH"></div> 
+    <script src="./scripts.js"></script> <!--Display graph in webpage-->
+  </div>
+</body>
+
+</html>
